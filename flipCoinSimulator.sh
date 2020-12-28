@@ -7,21 +7,23 @@ isTail=1
 headCount=0
 tailCount=0
 
-read -p "How many times you want to flip the coin : " flipCount
-
-for (( i=1; i<=$flipCount; i++ ))
+while [[ $headCount -le 21 && $tailCount -le 21 ]]
 do
-	flipResult=$((RANDOM%2))
-
-	if [ $flipResult -eq $isHead ]
-	then
-		echo "Heads"
+        flipResult=$((RANDOM%2))
+        if [ $flipResult -eq $isHead ]
+        then
                 headCount=$((headCount+1))
-	else
-		echo "Tails"
+        else
                 tailCount=$((tailCount+1))
-	fi
+        fi
 done
 
-echo "Head has won "$headCount" times."
-echo "Tail has won "$tailCount" times."
+if [ $headCount -gt $tailCount ]
+then
+        echo "Head is won by "$((headCount-tailCount))
+elif [ $tailCount -gt $headCount ]
+then
+        echo "Tail is won by "$((tailCount-headCount))
+else
+        echo "Game is Tie ! "
+fi
